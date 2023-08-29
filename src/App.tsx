@@ -23,6 +23,7 @@ export function App() {
     if(!employees){
       setIsLoading(true)
     }
+
     transactionsByEmployeeUtils.invalidateData()
 
     await employeeUtils.fetchAll()
@@ -35,6 +36,7 @@ export function App() {
     async (employeeId: string) => {
       paginatedTransactionsUtils.invalidateData()
       await transactionsByEmployeeUtils.fetchById(employeeId)
+
     },
     [paginatedTransactionsUtils, transactionsByEmployeeUtils]
   )
@@ -82,7 +84,7 @@ export function App() {
         <div className="RampGrid">
           <Transactions transactions={transactions} />
 
-          {transactions !== null && (
+          {paginatedTransactions && transactions !== null && (
             <button
               className="RampButton"
               disabled={paginatedTransactionsUtils.loading}
