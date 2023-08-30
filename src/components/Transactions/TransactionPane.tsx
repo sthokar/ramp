@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { InputCheckbox } from "../InputCheckbox"
 import { TransactionPaneComponent } from "./types"
 
@@ -8,6 +8,11 @@ export const TransactionPane: TransactionPaneComponent = ({
   setTransactionApproval: consumerSetTransactionApproval,
 }) => {
   const [approved, setApproved] = useState(transaction.approved)
+  
+  useEffect(() => {
+    // Update the approved state whenever transaction.approved changes
+    setApproved(transaction.approved);
+  }, [transaction.approved]);
 
   return (
     <div className="RampPane">
